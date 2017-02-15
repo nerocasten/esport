@@ -1,0 +1,162 @@
+{% extends '/templates/admin_template.html' %}
+
+{% block scryle %}
+{{parent()}}
+<link href="{{__t.a('bootstrap-fileinput/bootstrap-fileinput.css','3party')}}" rel="stylesheet" type="text/css" />
+{% endblock scryle %}
+
+{% block content %}
+	<!-- BEGIN SAMPLE FORM PORTLET-->
+    <div class="portlet light bordered">
+        <div class="portlet-title tabbable-line">
+            <div class="caption">
+                <i class="icon-bubble font-green-sharp"></i>
+                <span class="caption-subject font-green-sharp bold uppercase">Player</span>
+            </div>
+        </div>
+        <div class="portlet-body form">        	
+            <form role="form" method="post" enctype="multipart/form-data">
+                <div class="form-body">
+                    <div class="form-group {{form_error('name')?'has-error':''}}">
+                        <label>Full name*</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-pencil font-purple"></i>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Full name" name="fullname" value="{{player.fullname}}">         
+                        </div>
+                        {{form_error('fullname')}}
+                    </div>
+                    <div class="form-group {{form_error('character')?'has-error':''}}">
+                        <label>Character</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-pencil font-purple"></i>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Game Character" name="character" value="{{player.character}}">         
+                        </div>
+                        {{form_error('character')}}
+                    </div>
+                    <div class="form-group">
+                        <label>Biography</label>
+                        <textarea class="form-control spinner" name="biography" id="" cols="30" rows="5">{{player.biography}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Main Position</label>
+                        <select class="form-control" name="position_id">
+                            <option>..... Select Position .....</option>
+                            {% if positions and positions|length>0 %}
+                                {% for item in positions %}
+                                <option value="{{item.id}}" {{player.position_id==item.id?'selected':''}}>{{item.title}}</option>
+                                {% endfor %}
+                            {% endif %}  
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Team</label>
+                        <select class="form-control" name="team_id">
+                            <option>..... Select Team .....</option>
+                            {% if team and team|length>0 %}
+                                {% for item in team %}
+                                <option value="{{item.id}}" {{player.team_id==item.id?'selected':''}}>{{item.name}}</option>
+                                {% endfor %}
+                            {% endif %}                            
+                        </select>
+                    </div>
+                    <div class="form-group last clearfix">
+                        <label>Image</label>
+                        <div class="col-xs-12">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                    <img src="{{__t.adminlib.user_avatar(player.image)}}" alt="" /> </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                                <div>
+                                    <span class="btn default btn-file">
+                                    <span class="fileinput-new"> Select image </span>
+                                    <span class="fileinput-exists"> Change </span>
+                                    <input type="file" name="image"> </span>
+                                    <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
+                                </div>
+                            </div>
+                            <div class="clearfix margin-top-10">
+                                <span class="label label-danger">NOTE!</span> Image preview only works in IE10+, FF3.6+, Safari6.0+, Chrome6.0+ and Opera11.1+. In older browsers the filename is shown instead.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Tag</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-tags font-purple"></i>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Tag" name="tag" value="{{player.tag}}">
+                        </div>
+                    </div>
+                    <div class="form-group video-group">
+                        <div class="portlet light bordered">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class=" fa fa-video-camera font-green"></i>
+                                    <span class="caption-subject font-dark bold uppercase">Video Player</span>
+                                </div>
+                                <div class="actions">
+                                    <div class="btn-group btn-group-devided" data-toggle="buttons">
+                                        <a class="btn red btn-outline btn-circle btn-sm active" href="{{site_url('admin/video/list_content_ajax')}}?player_id={{__t.player_id}}'" data-target="#video-list-aj" data-toggle="modal">
+                                            Add video
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portlet-body video-player-list">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions right">
+                    <button type="submit" class="btn green">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- END SAMPLE FORM PORTLET-->
+
+    <div class="modal fade" id="video-list-aj" tabindex="-1" role="video-list-aj" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                Loading...
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block botscryle %}
+<script src="{{__t.a('bootstrap-fileinput/bootstrap-fileinput.js','3party')}}" type="text/javascript"></script>
+<script>
+    var playerVideoRenderHtml=function(video_ids){
+        $.ajax({
+            url:'{{site_url("admin/player/video_html_ajax")}}',
+            data:{
+                video_ids:JSON.stringify(video_ids)
+            }
+        }).success(function(data){
+            $('.video-player-list').html(data);
+        });
+    }
+    {% if __t.player_id and __t.player_id>0 %}
+    var playerVideoRenderHtmlWithPlayerId=function(){
+        $.ajax({
+            url:'{{site_url("admin/player/video_html_ajax")}}',
+            data:{
+                player_id:'{{__t.player_id}}'
+            }
+        }).success(function(data){
+            $('.video-player-list').html(data);
+        });
+    }
+    $(document).ready(function(){
+        playerVideoRenderHtmlWithPlayerId();
+    });
+    {% endif %}
+</script>
+{{parent()}}
+{% endblock botscryle %}

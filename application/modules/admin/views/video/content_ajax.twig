@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class=" fa fa-video-camera font-green"></i>
+                    <span class="caption-subject font-green bold uppercase">Video List</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="mt-element-card mt-element-overlay">
+                    <div class="row">
+                        {% if videos and videos|length>0 %}
+                        {% for video in videos %}
+                        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
+                            <div class="mt-card-item video-card-item {{in_array(video.id,player_video)?'selected':''}}">
+                                
+                                <div class="mt-card-avatar mt-overlay-1">
+                                    <input type="hidden" class="video_id" value="{{video.id}}">
+                                    <img src="{{__t.adminlib.video_image(video.image)}}" />
+                                    <div class="mt-overlay">
+                                        <ul class="mt-info">
+                                            <li>
+                                                <a class="btn default btn-outline btn-video-select" href="javascript:;">
+                                                    <i class="fa fa-hand-pointer-o"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-card-content">
+                                    <h3 class="mt-card-name">{{video.title}}</h3>
+                                    <p class="mt-card-desc font-grey-mint"></p>
+                                </div>
+                            </div>
+                        </div> 
+                        {% endfor %}
+                        {% endif %}                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .mt-element-card .video-card-item.selected{
+        border-color:blue;
+    }
+</style>
+
+<script>
+    $(document).ready(function(){
+        $('.btn-video-select').click(function(){
+            $(this).parents('.video-card-item').toggleClass('selected');
+            var videoSelected=$('.video-card-item.selected');
+            var video_ids =[];
+            for(var i=0;i<videoSelected.length;i++){
+                var video_id=$($(videoSelected)[i]).find('.video_id').val();
+                video_ids.push(video_id);
+            }
+            playerVideoRenderHtml(video_ids);
+        });
+    });
+</script>

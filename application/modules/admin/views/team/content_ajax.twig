@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class=" fa fa-group font-green"></i>
+                    <span class="caption-subject font-green bold uppercase">Team List</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="mt-element-card mt-element-overlay">
+                    <div class="row">
+                        {% if teams and teams|length>0 %}
+                        {% for team in teams %}
+                        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
+                            <div class="mt-card-item team-card-item {{in_array(team.id,team_video)?'selected':''}}">
+                                
+                                <div class="mt-card-avatar mt-overlay-1">
+                                    <input type="hidden" class="team_id" value="{{team.id}}">
+                                    <img src="{{__t.adminlib.team_image(team.image)}}" />
+                                    <div class="mt-overlay">
+                                        <ul class="mt-info">
+                                            <li>
+                                                <a class="btn default btn-outline btn-team-select" href="javascript:;">
+                                                    <i class="fa fa-hand-pointer-o"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-card-content">
+                                    <h3 class="mt-card-name">{{team.name}}</h3>
+                                    <p class="mt-card-desc font-grey-mint"></p>
+                                </div>
+                            </div>
+                        </div> 
+                        {% endfor %}
+                        {% endif %}                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .mt-element-card .team-card-item.selected{
+        border-color:blue;
+    }
+</style>
+
+<script>
+    $(document).ready(function(){
+        $('.btn-team-select').click(function(){
+            $(this).parents('.team-card-item').toggleClass('selected');
+            var teamSelected=$('.team-card-item.selected');
+            var team_ids =[];
+            for(var i=0;i<teamSelected.length;i++){
+                var team_id=$($(teamSelected)[i]).find('.team_id').val();
+                team_ids.push(team_id);
+            }
+            console.log(team_ids);
+            videoTeamRenderHtml(team_ids);
+        });
+    });
+</script>

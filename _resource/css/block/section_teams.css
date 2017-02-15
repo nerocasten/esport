@@ -1,0 +1,25 @@
+#teams {margin-top:60px;}
+#teams .block {margin-top:40px;}
+#teams .title {font-size:32px; text-align:center;}
+#teams .t_item {
+	width:292px; height:171px; position:relative; overflow:hidden; float:left; margin:10px 8px 20px 0; border:1px solid transparent; cursor:pointer; z-index:4;
+	-webkit-transition:.25s ease-in-out;
+			transition:.25s ease-in-out;
+}
+#teams .t_item:nth-child(4n) {margin-right:0;}
+#teams .t_item .img {height:120px; width:120px; margin:0 86px; opacity:0.7;}
+#teams .t_item .name,
+#teams .t_item .fullname {width:100%; text-align:center; font-size:16px; text-transform:uppercase; float:left; line-height:1; color:#f9f9f9; font-weight:800; opacity:0.85;}
+#teams .t_item .name {margin:5px 0; opacity:0.6;}
+#teams .t_item .fullname {font-size:22px;}
+
+#teams .t_item .img,
+#teams .t_item .name,
+#teams .t_item .fullname {
+	-webkit-transition:.25s ease-in-out;
+			transition:.25s ease-in-out;
+}
+
+#teams .t_item:hover .img,
+#teams .t_item:hover .name,
+#teams .t_item:hover .fullname {opacity:1;}

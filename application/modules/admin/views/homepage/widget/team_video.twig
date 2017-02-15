@@ -1,0 +1,67 @@
+<div class="portlet box green-haze box-widget-item news-list-draggable">
+    <div class="portlet-title ui-sortable-handle">
+        <div class="caption">
+            <i class="icon-speech"></i>
+            <span class="caption-subject bold uppercase"> Team: {{data.title}}</span>
+        </div>
+        <div class="actions">
+            {% if action=='delete' %}
+                <a href="javascript:;" class="btn btn-circle btn-default btn-sm delete-widget-homepage">
+                    <i class="fa fa-plus"></i> Delete
+                </a>
+            {% else %}
+                <a href="javascript:;" class="btn btn-circle btn-default btn-sm delete-widget-homepage" style="display: none">
+                    <i class="fa fa-plus"></i> Delete
+                </a>
+                <a href="javascript:;" class="btn btn-default btn-sm add-widget-homepage">
+                    <i class="fa fa-plus"></i> Add
+                </a>
+            {% endif %}
+        </div> 
+        <div class="tools">
+            <a href="" class="expand" data-original-title="" title=""> </a>
+        </div>
+    </div>
+    <div class="portlet-body box-widget-body-item" style="display: none">
+        <input type="hidden" name="data[{{data.position}}][type]" value="team_video">
+    	<input type="hidden" id="hp-wg-id" name="data[{{data.position}}][id]" value="{{(data.id and data.id)>0?data.id:0}}">
+        <input type="hidden" id="hp-wg-status" name="data[{{data.position}}][status]" value="open">
+        <div class="form-group">
+            <label for="">Tiêu đề</label>
+            <input type="text" class="form-control" name="data[{{data.position}}][title]" value="{{data.title}}">
+        </div>
+        <div class="form-group">
+            <label for="">Label</label>
+            <select name="data[{{data.position}}][label_id]" id="" class="form-control">
+                <option value="">..... Select Label .....</option>
+                {% if labels and labels|length>0 %}
+                    {% for item in labels %}
+                    <option {{item.id==data.label_id?'selected':''}} value="{{item.id}}">{{item.title}}</option>
+                    {% endfor %}
+                {% endif %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="">Category</label>
+            <select name="data[{{data.position}}][category_id]" id="" class="form-control">
+                <option value="">..... Select Category .....</option>
+                {% if categorys and categorys|length>0 %}
+                    {% for item in categorys %}
+                    <option {{item.id==data.category_id?'selected':''}} value="{{item.id}}">{{item.title}}</option>
+                    {% endfor %}
+                {% endif %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="">Team</label>
+            <select name="data[{{data.position}}][refer_id]" id="" class="form-control">
+                <option value="">..... Select Team .....</option>
+                {% if team and team|length>0 %}
+                    {% for item in team %}
+                    <option {{item.id==data.refer_id?'selected':''}} value="{{item.id}}">{{item.name}}</option>
+                    {% endfor %}
+                {% endif %}
+            </select>
+        </div>   
+    </div>
+</div>

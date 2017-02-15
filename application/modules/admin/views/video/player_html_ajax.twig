@@ -1,0 +1,38 @@
+<div class="mt-element-card mt-element-overlay">
+    <div class="row">
+        {% if players and players|length>0 %}
+        {% for player in players %}
+        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 player-card-wr-item">
+            <div class="mt-card-item player-card-item">                
+                <div class="mt-card-avatar mt-overlay-1">
+                    <input type="hidden" class="player_id" name="player_ids[]" value="{{player.id}}">
+                    <img src="{{__t.adminlib.player_image(player.image)}}" />
+                    <div class="mt-overlay">
+                        <ul class="mt-info">
+                            <li>
+                                <a class="btn default btn-outline btn-player-unselect" href="javascript:;">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-card-content">
+                    <h3 class="mt-card-name">{{player.fullname}}</h3>
+                    <p class="mt-card-desc font-grey-mint"></p>
+                </div>
+            </div>
+        </div>  
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('.btn-player-unselect').click(function(){
+            $(this).parents('.player-card-wr-item').remove();
+        });
+    });
+</script>

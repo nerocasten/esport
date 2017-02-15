@@ -1,0 +1,38 @@
+<div class="mt-element-card mt-element-overlay">
+    <div class="row">
+        {% if videos and videos|length>0 %}
+        {% for video in videos %}
+        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 video-card-wr-item">
+            <div class="mt-card-item video-card-item">                
+                <div class="mt-card-avatar mt-overlay-1">
+                    <input type="hidden" class="video_id" name="video_player_ids[]" value="{{video.id}}">
+                    <img src="{{__t.adminlib.video_image(video.image)}}" />
+                    <div class="mt-overlay">
+                        <ul class="mt-info">
+                            <li>
+                                <a class="btn default btn-outline btn-video-unselect" href="javascript:;">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-card-content">
+                    <h3 class="mt-card-name">{{video.title}}</h3>
+                    <p class="mt-card-desc font-grey-mint"></p>
+                </div>
+            </div>
+        </div>  
+        {% endfor %}
+        {% endif %}                      
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('.btn-video-unselect').click(function(){
+            $(this).parents('.video-card-wr-item').remove();
+        });
+    });
+</script>

@@ -1,0 +1,99 @@
+<table class="table table-striped table-bordered" id="data-table" width="100%">
+	<thead>
+		<tr>
+			{% for item in datatables.init_data %}
+				<th width="{{item.width}}">{{item.label|raw}}</th>
+			{% endfor %}
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			{% for item in datatables.init_data %}
+				<th width="{{item.width}}">{{(item.label and item.name!="button"?item.label:'')|raw}}</th>
+			{% endfor %}
+		</tr>
+	</tfoot>
+	<tbody>
+	</tbody>
+</table>
+
+<script type="text/javascript">
+$(function () {
+	$('#data-table').dataTable({
+		"sPaginationType": "full_numbers",
+		"sPaginationType": "bootstrap",
+		"bProcessing": true,
+		"bServerSide": true,
+		"sAjaxSource": "{{datatables.json_data}}",		
+		"aoColumnDefs": [
+        {% for k,item in datatables.init_data %}
+        	{% if item.sort!=false %}
+        		{% set sort= '['~k~', "'~item.sort~'"]' %}
+        	{% endif %}
+        	{% if item.searchoptions!=false %}
+     			{ "bSortable": false, "aTargets": [{{k}}] },
+     		{% endif %}
+     	{% endfor %}
+			
+		],
+		"aaSorting": [{{sort}}],
+		"aoColumns": [
+				{% for item in datatables.init_data %}
+					{% if item.visible=='false' %}
+		        		{"bVisible": false},
+		        	{% else %}
+		        		null,
+		        	{% endif %}
+		        {% endfor %}
+		 ],		
+		"fnServerData": function( sUrl, aoData, fnCallback ) {
+			$.ajax( {
+				"url": sUrl,
+				"data": aoData,
+				"type": "POST",
+				"success": fnCallback,
+				"dataType": "jsonp",
+				"cache": false
+			} );
+		},
+	}).columnFilter({
+		sPlaceHolder: "",
+		aoColumns: [
+		 {% for item in datatables.init_data %}
+		 	{% if item.searchoptions!=false %}
+		 	{
+		 		type: "{{item.searchoptions.type}}",
+		 		values: "{{item.searchoptions.values}}",			
+			},
+			{% else %}
+			null,
+			{% endif %}
+		{% endfor %}
+		]
+
+	});
+	$("div#data-table_filter").html('{{datatables.filter}}');
+});
+</script>
+
+<style type="text/css">
+	select, input{
+		width: 100% !important;
+		padding: 4px 0px !important;
+	}
+	.dataTables_processing {
+		background-color: white;
+		border: 1px solid #DDDDDD;
+		color: #999999;
+		font-size: 14px;
+		height: 30px;
+		left: 50%;
+		margin-left: -125px;
+		margin-top: -15px;
+		padding: 14px 0 2px;
+		position: absolute;
+		text-align: center;
+		top: 50%;
+		width: 250px;
+	}
+</style>

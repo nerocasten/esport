@@ -1,0 +1,90 @@
+{% extends 'templates/admin_template.html' %}
+
+{% block content %}
+<div class="row">
+    <form action="" method="post" id="home_page_news">
+    <div class="col-sm-7 column">
+        <div class="col-xs-12 news-display-select">
+            {% if overview and overview|length>0 %}
+            {% for item in overview %}
+                {{item|raw}}
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group">
+                <button type="submmit" class="form-control btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+    </form>
+    <div class="col-sm-5 column">
+        <div class="portlet light bg-inverse">
+            <div class="portlet-title">
+                <div class="caption font-red-sunglo">
+                    <i class="icon-share font-red-sunglo"></i>
+                    <span class="caption-subject bold uppercase"> Sidebar Widget</span>
+                    <span class="caption-helper"></span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                {% if widget_overview and widget_overview|length>0 %}
+                {% for item in widget_overview %}
+                    {{item|raw}}
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- empty sortable porlet required for each columns! -->        
+    <div class="portlet news-all-draggable portlet-sortable-empty"> </div>
+</div>
+{% endblock content %}
+
+{% block scryle %}
+{{parent()}}
+<script>
+
+
+jQuery(document).ready(function() {
+    $("#home_page_news").sortable({
+	    connectWith: ".news-list-draggable",
+	    items: ".news-list-draggable", 
+	    opacity: 0.8,
+	    handle : '.portlet-title',
+	    coneHelperSize: true,
+	    placeholder: 'portlet-sortable-placeholder',
+	    forcePlaceholderSize: true,
+	    tolerance: "pointer",
+	    helper: "clone",
+	    tolerance: "pointer",
+	    forcePlaceholderSize: !0,
+	    helper: "clone",
+	    cancel: ".portlet-sortable-empty, .portlet-fullscreen", // cancel dragging if portlet is in fullscreen mode
+	    revert: 250, // animation in milliseconds
+	    update: function(b, c) {
+	        if (c.item.prev().hasClass("portlet-sortable-empty")) {
+	            c.item.prev().before(c.item);
+	        }                    
+	    }
+	});
+
+    $('.add-widget-homepage').click(function(){
+        var widgetHomepageItemClone=$(this).parents('.box-widget-item').clone(true,true);
+        var widgetHomepageItemCloneHtml = widgetHomepageItemClone.html();
+        var displaySelectLength = $("#home_page_news .news-display-select>.box-widget-item").length;
+        widgetHomepageItemCloneHtml=widgetHomepageItemCloneHtml.replace(/data\[\s*\]/gi,'data['+(displaySelectLength+1)+']');
+        widgetHomepageItemClone.html(widgetHomepageItemCloneHtml);
+        $("#home_page_news .news-display-select").append(widgetHomepageItemClone);
+        $($(widgetHomepageItemClone)[0]).find('.actions>.delete-widget-homepage').show();
+        $($(widgetHomepageItemClone)[0]).find('.actions>.add-widget-homepage').hide();
+    });
+
+    $('#home_page_news').on('click','.delete-widget-homepage',function(){
+        $(this).parents('.box-widget-item').hide();
+        $(this).parents('.box-widget-item').find('#hp-wg-status').val('close');
+    });
+});
+</script>
+{% endblock scryle %}

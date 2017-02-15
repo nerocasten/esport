@@ -1,0 +1,33 @@
+{% extends '/templates/admin_template.html' %}
+
+{% block content %}
+	<!-- BEGIN SAMPLE FORM PORTLET-->
+    <div class="portlet light bordered">
+        <div class="portlet-title tabbable-line">
+            <div class="caption">
+                <i class="icon-bubble font-green-sharp"></i>
+                <span class="caption-subject font-green-sharp bold uppercase">Label</span>
+            </div>
+        </div>
+        <div class="portlet-body form">        	
+            <form role="form" method="post">
+                <div class="form-body">
+                    <div class="form-group {{form_error('title')?'has-error':''}}">
+                        <label>Title*</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-pencil font-purple"></i>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Title" name="title" value="{{label.title}}">         
+                        </div>
+                        {{form_error('title')}}
+                    </div>
+                </div>
+                <div class="form-actions right">
+                    <button type="submit" class="btn green">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- END SAMPLE FORM PORTLET-->
+{% endblock content %}

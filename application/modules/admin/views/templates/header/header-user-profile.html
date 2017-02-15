@@ -1,0 +1,16 @@
+<div class="btn-group-img btn-group">
+    <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+        <img src="{{__t.adminlib.user_avatar(user_login_info.avatar)}}" alt="{{user_login_info.user_id}}"> </button>
+    <ul class="dropdown-menu-v2" role="menu">
+        <li>
+            <a href="{{site_url('admin/profile')}}">
+                <i class="icon-user"></i> My Profile
+            </a>
+        </li>
+        <li class="divider"> </li>
+        <li>
+            <a href="{{site_url('admin/signin/out')}}">
+                <i class="icon-key"></i> Log Out </a>
+        </li>
+    </ul>
+</div>

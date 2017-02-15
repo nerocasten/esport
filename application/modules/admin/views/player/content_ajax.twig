@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class=" fa fa-user font-green"></i>
+                    <span class="caption-subject font-green bold uppercase">Player List</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="mt-element-card mt-element-overlay">
+                    <div class="row">
+                        {% if players and players|length>0 %}
+                        {% for player in players %}
+                        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
+                            <div class="mt-card-item player-card-item {{in_array(player.id,player_video)?'selected':''}}">
+                                
+                                <div class="mt-card-avatar mt-overlay-1">
+                                    <input type="hidden" class="player_id" value="{{player.id}}">
+                                    <img src="{{__t.adminlib.player_image(player.image)}}" />
+                                    <div class="mt-overlay">
+                                        <ul class="mt-info">
+                                            <li>
+                                                <a class="btn default btn-outline btn-player-select" href="javascript:;">
+                                                    <i class="fa fa-hand-pointer-o"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-card-content">
+                                    <h3 class="mt-card-name">{{player.fullname}}</h3>
+                                    <p class="mt-card-desc font-grey-mint"></p>
+                                </div>
+                            </div>
+                        </div> 
+                        {% endfor %}
+                        {% endif %}                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .mt-element-card .player-card-item.selected{
+        border-color:blue;
+    }
+</style>
+
+<script>
+    $(document).ready(function(){
+        $('.btn-player-select').click(function(){
+            $(this).parents('.player-card-item').toggleClass('selected');
+            var playerSelected=$('.player-card-item.selected');
+            var player_ids =[];
+            for(var i=0;i<playerSelected.length;i++){
+                var player_id=$($(playerSelected)[i]).find('.player_id').val();
+                player_ids.push(player_id);
+            }
+            playerVideoRenderHtml(player_ids);
+        });
+    });
+</script>

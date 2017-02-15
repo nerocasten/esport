@@ -1,0 +1,83 @@
+{% extends '/templates/admin_template.html' %}
+
+{% block scryle %}
+{{parent()}}
+<link href="{{__t.a('bootstrap-fileinput/bootstrap-fileinput.css','3party')}}" rel="stylesheet" type="text/css" />
+{% endblock scryle %}
+
+{% block content %}
+    <!-- BEGIN SAMPLE FORM PORTLET-->
+    <div class="portlet light bordered">
+        <div class="portlet-title tabbable-line">
+            <div class="caption">
+                <i class="icon-bubble font-green-sharp"></i>
+                <span class="caption-subject font-green-sharp bold uppercase">Team</span>
+            </div>
+        </div>
+        <div class="portlet-body form">         
+            <form role="form" method="post">
+                <div class="form-body">
+                    <div class="form-group {{form_error('name')?'has-error':''}}">
+                        <label>Name*</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-pencil font-purple"></i>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Name" name="name" value="{{team.name}}">         
+                        </div>
+                        {{form_error('name')}}
+                    </div>
+                    <div class="form-group">
+                        <label>Introduction</label>
+                        <textarea class="form-control spinner tinymcefull" name="introduction" id="" cols="30" rows="5">{{team.introduction}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Zone</label>
+                        <select class="form-control" name="zone_id">
+                            <option value="">..... Select Zone .....</option>
+                            {% if zones and zones|length>0 %}
+                                {% for item in zones %}
+                                    <option value="{{item.id}}" {{team.zone_id==item.id?'selected':''}}>{{item.name}}</option>
+                                {% endfor %}
+                            {% endif %}                            
+                        </select>
+                    </div>   
+                    <div class="form-group">
+                        <label>League</label>
+                        <select class="form-control" name="league_id">
+                            <option value="">..... Select League .....</option>
+                            {% if leagues and leagues|length>0 %}
+                                {% for item in leagues %}
+                                    <option value="{{item.id}}" {{team.league_id==item.id?'selected':''}}>{{item.name}}</option>
+                                {% endfor %}
+                            {% endif %}  
+                        </select>
+                    </div>   
+                    <div class="form-group">
+                        <label>Tag</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-tags font-purple"></i>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Tag" name="tag" value="{{team.tag}}">
+                        </div>
+                        {{form_error('tag')}}
+                    </div>
+                </div>
+
+                <div class="form-actions right">
+                    <button type="submit" class="btn green">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- END SAMPLE FORM PORTLET-->
+{% endblock content %}
+
+{% block botscryle %}
+<script src="{{__t.a('bootstrap-fileinput/bootstrap-fileinput.js','3party')}}" type="text/javascript"></script>
+<script src="{{__t.a('tinymce/2.4.6/tinymce.min.js','3party')}}" type="text/javascript"></script>
+<script src="{{__t.a('tinymce/2.4.6/jquery.tinymce.min.js','3party')}}" type="text/javascript"></script>
+<script src="{{__t.a('tinymce/function.tinymce.js','3party')}}" type="text/javascript"></script>
+{{parent()}}
+{% endblock botscryle %}

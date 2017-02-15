@@ -1,0 +1,210 @@
+<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+<!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+<div class="page-sidebar navbar-collapse collapse">
+    <!-- BEGIN SIDEBAR MENU -->
+    <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+    <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+    <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+    <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+    <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+    <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+        <li class="nav-item start ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-home"></i>
+                <span class="title">Dashboard</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item start ">
+                    <a href="index.html" class="nav-link ">
+                        <i class="icon-bar-chart"></i>
+                        <span class="title">Dashboard 1</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="dashboard_2.html" class="nav-link ">
+                        <i class="icon-bulb"></i>
+                        <span class="title">Dashboard 2</span>
+                        <span class="badge badge-success">1</span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="dashboard_3.html" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">Dashboard 3</span>
+                        <span class="badge badge-danger">5</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="heading">
+            <h3 class="uppercase">Management</h3>
+        </li>
+        <li class="nav-item ">
+            <a href="{{site_url('admin/video')}}" class="nav-link nav-toggle">
+                <i class="icon-social-youtube"></i>
+                <span class="title">Videos</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="{{site_url('admin/video')}}" class="nav-link ">
+                        <i class="icon-list "></i>
+                        <span class="title">List</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{site_url('admin/video/index/create')}}" class="nav-link ">
+                        <i class="icon-plus "></i>
+                        <span class="title">New</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{site_url('admin/video/label')}}"  class="nav-link nav-toggle">
+                        <i class="fa fa-font "></i>
+                        <span class="title">Label</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="{{site_url('admin/video/label')}}" class="nav-link ">
+                                <i class="icon-list "></i>
+                                <span class="title">List</span>
+                            </a>
+                        </li>
+                        <li class="nav-item start ">
+                            <a href="{{site_url('admin/video/label/create')}}" class="nav-link ">
+                                <i class="icon-plus "></i>
+                                <span class="title">New</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="fa fa-star"></i>
+                <span class="title">Player</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item  ">
+                    <a href="{{site_url('admin/player')}}" class="nav-link ">
+                        <i class="icon-list"></i>
+                        <span class="title">List</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="{{site_url('admin/player/index/create')}}" class="nav-link ">
+                        <i class="icon-plus"></i>
+                        <span class="title">New</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="fa fa-leaf"></i>
+                <span class="title">League</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item  ">
+                    <a href="{{site_url('admin/league')}}" class="nav-link ">
+                        <i class="icon-list"></i>
+                        <span class="title">List</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="{{site_url('admin/league/index/create')}}" class="nav-link ">
+                        <i class="icon-plus"></i>
+                        <span class="title">New</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="fa fa-group"></i>
+                <span class="title">Team</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item  ">
+                    <a href="{{site_url('admin/team')}}" class="nav-link ">
+                        <i class="icon-list"></i>
+                        <span class="title">List</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="{{site_url('admin/team/index/create')}}" class="nav-link ">
+                        <i class="icon-plus"></i>
+                        <span class="title">New</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="fa fa-globe"></i>
+                <span class="title">Zone</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item  ">
+                    <a href="{{site_url('admin/zone')}}" class="nav-link ">
+                        <i class="icon-list"></i>
+                        <span class="title">List</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="{{site_url('admin/zone/index/create')}}" class="nav-link ">
+                        <i class="icon-plus"></i>
+                        <span class="title">New</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-user"></i>
+                <span class="title">User</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item  ">
+                    <a href="{{site_url('admin/users')}}" class="nav-link ">
+                        <i class="icon-list"></i>
+                        <span class="title">List</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="{{site_url('admin/users/index/create')}}" class="nav-link ">
+                        <i class="icon-plus"></i>
+                        <span class="title">New</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="heading">
+            <h3 class="uppercase">Home page</h3>
+        </li>
+
+        <li class="nav-item  ">
+            <a href="{{site_url('admin/homepage/index/overview')}}" class="nav-link nav-toggle">
+                <i class="icon-home"></i>
+                <span class="title">Home</span>
+            </a>
+        </li>
+    </ul>
+    <!-- END SIDEBAR MENU -->
+</div>

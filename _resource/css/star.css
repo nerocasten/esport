@@ -1,0 +1,58 @@
+@import url('block/default.css');
+@import url('block/header.css');
+@import url('block/section_videos.css');
+
+.bg_main {height:660px;}
+
+/***** About Team *****/
+	#star .about_star {width:100%; float:left; position:relative; z-index:3; padding-top:250px; height:350px; margin-bottom:10px;}
+	#star .about_star:after {
+		content:''; bottom:0; left:0; height:200px; z-index:2; position:absolute; width:100%;
+		background: -webkit-gradient(linear,left top,left bottom,color-stop(0,rgba(13,13,13,.01)),to(#0D0D0D));
+		background: -webkit-linear-gradient(top,rgba(13,13,13,.01) 0,#0D0D0D 100%);
+		background: 		linear-gradient(to bottom,rgba(13,13,13,.01) 0,#0D0D0D 100%);
+	}
+	#star .about_star .star_img {height:600px; position:absolute; top:0; left:0; z-index:2; opacity:0;}
+
+	#star .about_star .star_firstname,
+	#star .about_star .star_summoner,
+	#star .about_star .star_lastname {width:50%; float:left; margin-left:46%; text-transform:uppercase; line-height:1; letter-spacing:10px; text-align:center; opacity:0;}
+	#star .about_star .star_firstname,
+	#star .about_star .star_lastname {font-size:24px;}
+	#star .about_star .star_summoner {font-size:72px; font-weight:800;}
+	#star .about_star .star_position {float:left; background:url(../img/logo_none.png) no-repeat center top; background-size:180px; width:180px; height:95px; padding-top:95px; text-align:center; font-weight:bold; line-height:1; font-size:18px; text-transform:uppercase; position:absolute; bottom:50px; left:40px; opacity:0;}
+	#star .about_star .star_team {width:300px; height:300px; position:absolute; right:0; top:150px; z-index:3; opacity:0;}
+
+/***** Animation *****/
+	#star .about_star .star_img {
+		-webkit-animation:showAvatar 2.8s ease-in-out forwards;
+				animation:showAvatar 2.8s ease-in-out forwards;
+	}
+	@keyframes showAvatar {
+		  0% {opacity:0; left:-99px;}
+		 33% {opacity:0; left:-99px;}
+		100% {opacity:1; left: 	0px;}
+	}
+
+	#star .about_star .star_firstname,
+	#star .about_star .star_summoner,
+	#star .about_star .star_lastname,
+	#star .about_star .star_position {
+		-webkit-animation:showPosition 2.8s ease-in-out 1.4s forwards;
+				animation:showPosition 2.8s ease-in-out 1.4s forwards;
+	}
+	@keyframes showPosition {
+		  0% {opacity:0;}
+		 33% {opacity:0;}
+		100% {opacity:1;}
+	}
+
+	#star .about_star .star_team {
+		-webkit-animation:showTeam 2.8s ease-in-out forwards;
+				animation:showTeam 2.8s ease-in-out forwards;
+	}
+	@keyframes showTeam {
+		  0% {opacity:  0; right:-99px;}
+		 33% {opacity:  0; right:-99px;}
+		100% {opacity:0.2; right:    0;}
+	}
